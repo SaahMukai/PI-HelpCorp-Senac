@@ -28,57 +28,22 @@ A HelpCorp é uma plataforma de gestão de chamados internos corporativos criada
 
 ---
 
-## 🏗️ Arquitetura da solução
+## 🏗️ Arquitetura da Solução
 
-A PoC utiliza uma arquitetura web em camadas, separando interface,
-processamento da aplicação e persistência dos dados.
+A PoC da HelpCorp utiliza uma arquitetura web em camadas, separando a interface, as regras da aplicação e a persistência dos dados.
 
 ```mermaid
 flowchart LR
+    U[Usuario Solicitante]
+    A[Atendente]
+    F[Frontend Web]
+    B[Backend API REST]
+    DB[(Banco de Dados)]
 
-    U["👤 Usuário<br>Solicitante"]
-    A["🧑‍💻 Atendente<br>Gestor"]
-
-    WEB["🌐 Navegador Web"]
-
-    FRONT["🖥️ Frontend<br>Interface da HelpCorp"]
-
-    API["⚙️ Backend<br>API REST"]
-
-    DB[("🗄️ Banco de Dados<br>Usuários · Categorias · Chamados")]
-
-    U --> WEB
-    A --> WEB
-    WEB --> FRONT
-    FRONT -->|HTTP / JSON| API
-    API -->|Consultas e persistência| DB
-    DB --> API
-    API --> FRONT
-```
-
-### Fluxo principal
-
-```mermaid
-sequenceDiagram
-    actor Usuario
-    participant Frontend
-    participant Backend
-    participant Banco
-    actor Atendente
-
-    Usuario->>Frontend: Abre um chamado
-    Frontend->>Backend: POST /chamados
-    Backend->>Banco: Salva chamado
-    Banco-->>Backend: Chamado registrado
-    Backend-->>Frontend: Confirmação
-
-    Atendente->>Frontend: Visualiza chamados
-    Frontend->>Backend: GET /chamados
-    Backend->>Banco: Consulta chamados
-    Banco-->>Backend: Dados
-    Backend-->>Frontend: Lista de chamados
-
-    Atendente->>Frontend: Atualiza status
-    Frontend->>Backend: PUT /chamados/{id}/status
-    Backend->>Banco: Atualiza chamado
+    U --> F
+    A --> F
+    F --> B
+    B --> DB
+    DB --> B
+    B --> F
 ```
