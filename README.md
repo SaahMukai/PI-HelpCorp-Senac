@@ -1,6 +1,3 @@
-# PI-HelpCorp-Senac
-PoC da HelpCorp, plataforma de gestão de chamados internos corporativos desenvolvida no Projeto Integrador do SENAC.
-
 <div align="center">
 
 # 🎧 HelpCorp
@@ -26,3 +23,39 @@ Centro Universitário SENAC · 5º semestre · 2026
 ---
 
 ## 📌 Sobre a HelpCorp
+
+A **HelpCorp** é uma plataforma de gestão de chamados internos corporativos criada para centralizar solicitações entre colaboradores e áreas como **TI, RH, Financeiro, Administrativo e Facilities**.
+
+A solução substitui canais dispersos, como e-mails e mensagens, por um fluxo único, rastreável e organizado, permitindo **abrir, acompanhar, priorizar e atualizar chamados** com mais transparência e eficiência.
+
+### O que a solução busca resolver
+
+- Centralizar solicitações internas em um único canal;
+- Garantir rastreabilidade dos atendimentos;
+- Facilitar o acompanhamento de status e prioridades;
+- Apoiar equipes de atendimento na organização das demandas;
+- Melhorar a experiência dos colaboradores.
+
+---
+
+## 🏗️ Arquitetura da Solução
+
+A PoC da HelpCorp utiliza uma arquitetura web em camadas, separando a interface, as regras da aplicação e a persistência dos dados.
+
+```mermaid
+flowchart LR
+    U["👤 Usuário Solicitante"]
+    A["🧑‍💻 Atendente / Gestor"]
+
+    F["🖥️ Frontend Web"]
+    B["⚙️ Backend / API REST"]
+    DB[("🗄️ Banco de Dados")]
+
+    U --> F
+    A --> F
+
+    F -->|"HTTP / JSON"| B
+    B -->|"Consultas e persistência"| DB
+    DB --> B
+    B --> F
+```
