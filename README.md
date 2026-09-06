@@ -24,7 +24,17 @@ Centro Universitário SENAC · 5º semestre · 2026
 
 ## 📌 Sobre a HelpCorp
 
-A HelpCorp é uma plataforma de gestão de chamados internos corporativos criada para centralizar solicitações entre colaboradores e áreas como TI, RH, Financeiro, Administrativo e Facilities. A proposta é substituir canais dispersos, como e-mails e mensagens, por um fluxo único, rastreável e organizado, permitindo abrir, acompanhar, priorizar e atualizar chamados com mais transparência e eficiência.
+A **HelpCorp** é uma plataforma de gestão de chamados internos corporativos criada para centralizar solicitações entre colaboradores e áreas como **TI, RH, Financeiro, Administrativo e Facilities**.
+
+A solução substitui canais dispersos, como e-mails e mensagens, por um fluxo único, rastreável e organizado, permitindo **abrir, acompanhar, priorizar e atualizar chamados** com mais transparência e eficiência.
+
+### O que a solução busca resolver
+
+- Centralizar solicitações internas em um único canal;
+- Garantir rastreabilidade dos atendimentos;
+- Facilitar o acompanhamento de status e prioridades;
+- Apoiar equipes de atendimento na organização das demandas;
+- Melhorar a experiência dos colaboradores.
 
 ---
 
