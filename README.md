@@ -34,16 +34,18 @@ A PoC da HelpCorp utiliza uma arquitetura web em camadas, separando a interface,
 
 ```mermaid
 flowchart LR
-    U[Usuario Solicitante]
-    A[Atendente]
-    F[Frontend Web]
-    B[Backend API REST]
-    DB[(Banco de Dados)]
+    U["👤 Usuário Solicitante"]
+    A["🧑‍💻 Atendente / Gestor"]
+
+    F["🖥️ Frontend Web"]
+    B["⚙️ Backend / API REST"]
+    DB[("🗄️ Banco de Dados")]
 
     U --> F
     A --> F
-    F --> B
-    B --> DB
+
+    F -->|"HTTP / JSON"| B
+    B -->|"Consultas e persistência"| DB
     DB --> B
     B --> F
 ```
