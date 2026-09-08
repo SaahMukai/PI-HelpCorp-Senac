@@ -20,6 +20,18 @@ Centro Universitário SENAC · 5º semestre · 2026
 
 </div>
 
+## 👥 Equipe & Orientação
+
+- **Integrantes do Grupo:**
+  - Bianca Caroline Paes Pacheco
+  - **Giuliana Beltrame Alves**
+  - Sabrina Mukai Nishidate
+  - Stephanny de Paula Vidal
+  - Taina Ferreira Rodrigues
+- **Professor Orientador:** Prof(a). Gustavo Calixto
+- **Instituição:** Centro Universitário SENAC — São Paulo, 2026
+- **Turma/Código:** STDCAS5DA_2602-686302
+
 ---
 
 ## 📌 Sobre a HelpCorp
