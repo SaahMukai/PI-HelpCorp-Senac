@@ -4,20 +4,6 @@ Landing Page oficial e interativa desenvolvida para o **Projeto Integrador I: An
 
 ---
 
-## 👥 Equipe & Orientação
-
-- **Integrantes do Grupo:**
-  - Bianca Caroline Paes Pacheco
-  - **Giuliana Beltrame Alves**
-  - Sabrina Mukai Nishidate
-  - Stephanny de Paula Vidal
-  - Taina Ferreira Rodrigues
-- **Professor Orientador:** Prof(a). Gustavo Calixto
-- **Instituição:** Centro Universitário SENAC — São Paulo, 2026
-- **Turma/Código:** STDCAS5DA_2602-686302
-
----
-
 ## 🚀 Como Executar e Apresentar a Landing Page
 
 A landing page foi desenvolvida com padrões web modernos (HTML5, Tailwind CSS, JavaScript Vanilla e CSS3), sem dependências complexas de compilação ou Node.js.
