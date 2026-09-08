@@ -1,0 +1,17 @@
+services:
+  - type: web
+    name: helpcorp-api
+    runtime: node
+    buildCommand: npm ci && npm run build
+    startCommand: npm start
+    envVars:
+      - key: USE_IN_MEMORY
+        value: "false"
+      - key: DATABASE_URL
+        sync: false
+      - key: FRONTEND_ORIGIN
+        sync: false
+      - key: DEMO_REQUESTER_ID
+        value: usr-camila
+      - key: DEMO_ATTENDANT_ID
+        value: usr-ricardo
