@@ -1,0 +1,1362 @@
+<!DOCTYPE html>
+<html lang="pt-BR" class="scroll-smooth">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>HelpCorp | Plataforma de Gestão de Chamados Internos Corporativos (IXM)</title>
+  <meta name="description" content="Plataforma digital centralizada de gestão de chamados internos corporativos com Inteligência Artificial, triagem automatizada, SLA dinâmico e conformidade LGPD.">
+  
+  <!-- Tailwind CSS CDN with configuration -->
+  <script src="https://cdn.tailwindcss.com"></script>
+  <script>
+    tailwind.config = {
+      darkMode: 'class',
+      theme: {
+        extend: {
+          colors: {
+            brand: {
+              50: '#f0f9ff',
+              100: '#e0f2fe',
+              500: '#0ea5e9',
+              600: '#0284c7',
+              700: '#0369a1',
+              dark: '#090e17',
+              surface: '#0f172a',
+              card: '#1e293b'
+            }
+          }
+        }
+      }
+    }
+  </script>
+
+  <!-- Custom Styles -->
+  <link rel="stylesheet" href="styles.css">
+</head>
+<body class="bg-[#090e17] text-slate-100 antialiased selection:bg-sky-500 selection:text-white">
+
+  <!-- ========================================================================
+       TOP NOTIFICATION BAR
+       ======================================================================== -->
+  <div class="bg-gradient-to-r from-sky-900/60 via-indigo-900/50 to-purple-900/60 border-b border-sky-500/20 py-2 px-4 text-xs text-center text-sky-200">
+    <div class="max-w-7xl mx-auto flex items-center justify-center gap-2 flex-wrap">
+      <span class="inline-flex items-center px-2 py-0.5 rounded-full text-[11px] font-semibold bg-sky-500/20 text-sky-300 border border-sky-400/30">
+        Enterprise IXM
+      </span>
+      <span><strong>HelpCorp 2026:</strong> Gestão de Chamados Internos Corporativos com Inteligência Artificial</span>
+      <span class="hidden md:inline text-slate-400">|</span>
+      <a href="#simulador" class="underline hover:text-white font-medium transition-colors">Testar Demonstração Interativa &rarr;</a>
+    </div>
+  </div>
+
+  <!-- ========================================================================
+       NAVBAR
+       ======================================================================== -->
+  <header class="sticky top-0 z-40 w-full backdrop-blur-xl bg-[#090e17]/85 border-b border-slate-800/80 transition-all">
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+      <div class="flex items-center justify-between h-20">
+        
+        <!-- Logo -->
+        <a href="#" class="flex items-center gap-3 group">
+          <div class="w-10 h-10 rounded-xl bg-gradient-to-tr from-sky-600 via-blue-600 to-indigo-600 p-0.5 shadow-lg shadow-sky-500/20 group-hover:scale-105 transition-transform">
+            <div class="w-full h-full bg-[#090e17] rounded-[10px] flex items-center justify-center">
+              <svg class="w-5 h-5 text-sky-400" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5">
+                <path stroke-linecap="round" stroke-linejoin="round" d="M13 10V3L4 14h7v7l9-11h-7z"/>
+              </svg>
+            </div>
+          </div>
+          <div>
+            <div class="flex items-center gap-1.5">
+              <span class="text-xl font-extrabold tracking-tight text-white font-sans">Help<span class="text-sky-400">Corp</span></span>
+              <span class="w-2 h-2 rounded-full bg-emerald-400 pulse-active"></span>
+            </div>
+            <p class="text-[10px] font-semibold tracking-wider text-slate-400 uppercase">Internal Experience Management</p>
+          </div>
+        </a>
+
+        <!-- Desktop Navigation Links -->
+        <nav class="hidden lg:flex items-center gap-8 text-sm font-medium text-slate-300">
+          <a href="#solucao" class="hover:text-sky-400 transition-colors">A Solução</a>
+          <a href="#diferenciais" class="hover:text-sky-400 transition-colors">Diferenciais IA</a>
+          <a href="#simulador" class="hover:text-sky-400 transition-colors flex items-center gap-1.5">
+            <span>Simulador</span>
+            <span class="px-1.5 py-0.5 text-[10px] font-bold rounded bg-purple-500/20 text-purple-300 border border-purple-500/30">Live</span>
+          </a>
+          <a href="#modulos" class="hover:text-sky-400 transition-colors">Módulos</a>
+          <a href="#roi" class="hover:text-sky-400 transition-colors">Calculadora ROI</a>
+          <a href="#lgpd" class="hover:text-sky-400 transition-colors">Segurança & LGPD</a>
+        </nav>
+
+        <!-- Right CTAs -->
+        <div class="hidden sm:flex items-center gap-3">
+          <button data-open-demo-modal class="text-xs font-semibold px-4 py-2.5 rounded-lg border border-slate-700 hover:border-slate-500 text-slate-200 hover:bg-slate-800 transition-all">
+            Login Corporativo (SSO)
+          </button>
+          <button data-open-demo-modal class="text-xs font-semibold px-4 py-2.5 rounded-lg bg-gradient-to-r from-sky-500 to-blue-600 hover:from-sky-400 hover:to-blue-500 text-white shadow-lg shadow-sky-500/25 hover:shadow-sky-500/40 transition-all">
+            Solicitar Demonstração
+          </button>
+        </div>
+
+        <!-- Mobile Hamburger Button -->
+        <div class="flex lg:hidden">
+          <button id="mobile-menu-toggle" type="button" class="text-slate-400 hover:text-white focus:outline-none p-2" aria-label="Abrir Menu">
+            <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16M4 18h16"/>
+            </svg>
+          </button>
+        </div>
+
+      </div>
+    </div>
+
+    <!-- Mobile Menu Dropdown -->
+    <div id="mobile-menu" class="hidden lg:hidden border-b border-slate-800 bg-[#0f172a] px-4 pt-2 pb-6 space-y-3">
+      <a href="#solucao" class="mobile-nav-link block py-2 text-slate-300 hover:text-sky-400 text-sm font-medium">A Solução</a>
+      <a href="#diferenciais" class="mobile-nav-link block py-2 text-slate-300 hover:text-sky-400 text-sm font-medium">Diferenciais IA</a>
+      <a href="#simulador" class="mobile-nav-link block py-2 text-sky-400 text-sm font-medium">Simulador do Sistema (Live)</a>
+      <a href="#modulos" class="mobile-nav-link block py-2 text-slate-300 hover:text-sky-400 text-sm font-medium">Módulos da Plataforma</a>
+      <a href="#roi" class="mobile-nav-link block py-2 text-slate-300 hover:text-sky-400 text-sm font-medium">Calculadora de ROI</a>
+      <a href="#lgpd" class="mobile-nav-link block py-2 text-slate-300 hover:text-sky-400 text-sm font-medium">Conformidade LGPD</a>
+      <div class="pt-4 flex flex-col gap-2">
+        <button data-open-demo-modal class="w-full text-center py-2.5 text-xs font-semibold rounded-lg bg-sky-500 text-white">Solicitar Demonstração</button>
+      </div>
+    </div>
+  </header>
+
+  <main>
+    <!-- ========================================================================
+         HERO SECTION
+         ======================================================================== -->
+    <section class="relative pt-12 pb-24 lg:pt-20 lg:pb-32 overflow-hidden hero-glow grid-overlay">
+      <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
+        
+        <div class="text-center max-w-4xl mx-auto space-y-6">
+          
+          <!-- Badge Pill -->
+          <div class="inline-flex items-center gap-2 px-3.5 py-1.5 rounded-full glass-panel border border-sky-500/30 text-xs font-medium text-sky-300 shadow-inner">
+            <span class="w-2 h-2 rounded-full bg-emerald-400 pulse-active"></span>
+            <span>Plataforma IXM • Internal Experience Management</span>
+            <span class="text-slate-500">|</span>
+            <span class="text-slate-300">Organizações a partir de 100 colaboradores</span>
+          </div>
+
+          <!-- Main Title -->
+          <h1 class="text-4xl sm:text-5xl lg:text-6xl font-extrabold tracking-tight text-white leading-[1.15]">
+            Elimine o caos do WhatsApp e transforme o suporte interno com <span class="text-gradient-cyan">Inteligência Artificial</span>
+          </h1>
+
+          <!-- Subtitle with Gartner research mention -->
+          <p class="text-lg sm:text-xl text-slate-300 max-w-3xl mx-auto font-normal leading-relaxed">
+            Centralize as demandas de <strong>TI, RH, Financeiro, Facilities e Administrativo</strong> em uma plataforma corporativa unificada, com triagem inteligente por PLN, SLA dinâmico e resolução autônoma de até 35% dos chamados.
+          </p>
+
+          <!-- CTAs -->
+          <div class="flex flex-col sm:flex-row items-center justify-center gap-4 pt-4">
+            <a href="#simulador" class="w-full sm:w-auto inline-flex items-center justify-center gap-2.5 px-8 py-4 rounded-xl font-bold text-sm bg-gradient-to-r from-sky-500 to-blue-600 hover:from-sky-400 hover:to-blue-500 text-white shadow-xl shadow-sky-500/25 hover:shadow-sky-500/40 transition-all group">
+              <span>Testar Simulador Interativo</span>
+              <svg class="w-4 h-4 group-hover:translate-x-1 transition-transform" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M14 5l7 7m0 0l-7 7m7-7H3"/></svg>
+            </a>
+            <button data-open-demo-modal class="w-full sm:w-auto inline-flex items-center justify-center gap-2 px-8 py-4 rounded-xl font-semibold text-sm glass-panel border border-slate-700 hover:border-slate-500 text-slate-200 hover:bg-slate-800/60 transition-all">
+              <svg class="w-4 h-4 text-sky-400" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M8 7V3m8 4V3m-9 8h10M5 21h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v12a2 2 0 002 2z"/></svg>
+              <span>Agendar Apresentação Executiva</span>
+            </button>
+          </div>
+
+          <!-- Micro Proof points -->
+          <div class="pt-6 flex items-center justify-center gap-6 text-xs text-slate-400 flex-wrap">
+            <div class="flex items-center gap-2">
+              <svg class="w-4 h-4 text-emerald-400" fill="currentColor" viewBox="0 0 20 20"><path fill-rule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zm3.707-9.293a1 1 0 00-1.414-1.414L9 10.586 7.707 9.293a1 1 0 00-1.414 1.414l2 2a1 1 0 001.414 0l4-4z" clip-rule="evenodd"/></svg>
+              <span>Conforme LGPD (Lei 13.709/18)</span>
+            </div>
+            <div class="flex items-center gap-2">
+              <svg class="w-4 h-4 text-emerald-400" fill="currentColor" viewBox="0 0 20 20"><path fill-rule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zm3.707-9.293a1 1 0 00-1.414-1.414L9 10.586 7.707 9.293a1 1 0 00-1.414 1.414l2 2a1 1 0 001.414 0l4-4z" clip-rule="evenodd"/></svg>
+              <span>Disponibilidade 99,5% SaaS</span>
+            </div>
+            <div class="flex items-center gap-2">
+              <svg class="w-4 h-4 text-emerald-400" fill="currentColor" viewBox="0 0 20 20"><path fill-rule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zm3.707-9.293a1 1 0 00-1.414-1.414L9 10.586 7.707 9.293a1 1 0 00-1.414 1.414l2 2a1 1 0 001.414 0l4-4z" clip-rule="evenodd"/></svg>
+              <span>Single Sign-On (SSO) Integrado</span>
+            </div>
+          </div>
+
+        </div>
+
+        <!-- Hero Preview Mockup -->
+        <div class="mt-14 max-w-5xl mx-auto">
+          <div class="relative rounded-2xl glass-panel p-2 md:p-4 border border-slate-700/80 shadow-2xl shadow-sky-950/50">
+            
+            <!-- Window Bar -->
+            <div class="flex items-center justify-between px-3 py-2 border-b border-slate-800 mb-3 text-xs text-slate-400">
+              <div class="flex items-center gap-2">
+                <span class="w-3 h-3 rounded-full bg-rose-500/80"></span>
+                <span class="w-3 h-3 rounded-full bg-amber-500/80"></span>
+                <span class="w-3 h-3 rounded-full bg-emerald-500/80"></span>
+                <span class="ml-2 font-mono text-[11px] text-slate-400">app.helpcorp.internal/dashboard/executive</span>
+              </div>
+              <div class="flex items-center gap-2">
+                <span class="w-2 h-2 rounded-full bg-emerald-400"></span>
+                <span class="text-[11px] text-emerald-400 font-medium">SLA Monitor: 98,4% no prazo</span>
+              </div>
+            </div>
+
+            <!-- Hero Mockup Body -->
+            <div class="grid grid-cols-1 md:grid-cols-4 gap-3">
+              
+              <!-- Metric 1 -->
+              <div class="p-4 rounded-xl bg-slate-900/80 border border-slate-800">
+                <p class="text-xs text-slate-400 font-medium">Tempo Médio Resolução (TMR)</p>
+                <div class="flex items-baseline gap-2 mt-1">
+                  <span class="text-2xl font-bold text-white">2h 14min</span>
+                  <span class="text-xs font-semibold text-emerald-400">-40% vs manual</span>
+                </div>
+                <div class="w-full bg-slate-800 h-1.5 rounded-full mt-3 overflow-hidden">
+                  <div class="bg-emerald-500 h-full rounded-full w-4/5"></div>
+                </div>
+              </div>
+
+              <!-- Metric 2 -->
+              <div class="p-4 rounded-xl bg-slate-900/80 border border-slate-800">
+                <p class="text-xs text-slate-400 font-medium">Resoluções por IA Generativa</p>
+                <div class="flex items-baseline gap-2 mt-1">
+                  <span class="text-2xl font-bold text-purple-400">35,2%</span>
+                  <span class="text-xs font-medium text-slate-400">sem intervenção</span>
+                </div>
+                <div class="w-full bg-slate-800 h-1.5 rounded-full mt-3 overflow-hidden">
+                  <div class="bg-purple-500 h-full rounded-full w-2/5"></div>
+                </div>
+              </div>
+
+              <!-- Metric 3 -->
+              <div class="p-4 rounded-xl bg-slate-900/80 border border-slate-800">
+                <p class="text-xs text-slate-400 font-medium">Índice de Satisfação (CSAT)</p>
+                <div class="flex items-baseline gap-2 mt-1">
+                  <span class="text-2xl font-bold text-amber-400">4,9 <span class="text-sm font-normal text-slate-400">/ 5.0</span></span>
+                  <span class="text-xs font-semibold text-emerald-400">96% favorável</span>
+                </div>
+                <div class="flex gap-1 mt-3">
+                  <span class="text-amber-400 text-xs">★★★★★</span>
+                </div>
+              </div>
+
+              <!-- Metric 4 -->
+              <div class="p-4 rounded-xl bg-slate-900/80 border border-slate-800">
+                <p class="text-xs text-slate-400 font-medium">Chamados Ativos Hoje</p>
+                <div class="flex items-baseline gap-2 mt-1">
+                  <span class="text-2xl font-bold text-sky-400">42</span>
+                  <span class="text-xs text-slate-400">38 em prazo / 4 triados</span>
+                </div>
+                <div class="w-full bg-slate-800 h-1.5 rounded-full mt-3 overflow-hidden">
+                  <div class="bg-sky-500 h-full rounded-full w-[90%]"></div>
+                </div>
+              </div>
+
+            </div>
+
+            <!-- Real-time Live Alert Strip -->
+            <div class="mt-3 p-3 rounded-xl bg-slate-900/90 border border-purple-500/30 flex items-center justify-between flex-wrap gap-2 text-xs">
+              <div class="flex items-center gap-2.5">
+                <span class="px-2 py-0.5 rounded bg-purple-500/20 text-purple-300 font-mono font-semibold text-[11px] border border-purple-500/40">IA TRIAGEM #4821</span>
+                <span class="text-slate-300 font-medium">"Notebook travado para campanha de marketing"</span>
+                <span class="text-slate-500 hidden sm:inline">&rarr;</span>
+                <span class="text-sky-300 hidden sm:inline">Classificado: TI > Hardware (Urgência Alta) • SLA: 4h úteis</span>
+              </div>
+              <div class="flex items-center gap-3">
+                <span class="text-slate-400">Atribuído a: <strong>Ricardo Mendes (TI)</strong></span>
+                <a href="#simulador" class="text-sky-400 hover:text-sky-300 font-semibold underline">Ver no simulador</a>
+              </div>
+            </div>
+
+          </div>
+        </div>
+
+      </div>
+    </section>
+
+    <!-- ========================================================================
+         KEY IMPACT METRICS BAR (Research & Industry Benchmarks)
+         ======================================================================== -->
+    <section class="py-12 border-y border-slate-800 bg-[#0c121e]">
+      <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+        <div class="grid grid-cols-2 md:grid-cols-4 gap-8 text-center">
+          
+          <div class="space-y-1">
+            <p class="text-3xl sm:text-4xl font-extrabold text-gradient-cyan">-40%</p>
+            <p class="text-sm font-semibold text-slate-200">Tempo Médio de Resolução (TMR)</p>
+            <p class="text-xs text-slate-400">Redução comprovada no ciclo de atendimento</p>
+          </div>
+
+          <div class="space-y-1">
+            <p class="text-3xl sm:text-4xl font-extrabold text-purple-400">35%</p>
+            <p class="text-sm font-semibold text-slate-200">Autoatendimento por IA</p>
+            <p class="text-xs text-slate-400">Demandas repetitivas resolvidas no chatbot</p>
+          </div>
+
+          <div class="space-y-1">
+            <p class="text-3xl sm:text-4xl font-extrabold text-amber-400">+30%</p>
+            <p class="text-sm font-semibold text-slate-200">Produtividade Resgatada</p>
+            <p class="text-xs text-slate-400">Eliminando retrabalho de tarefas dispersas (Gartner)</p>
+          </div>
+
+          <div class="space-y-1">
+            <p class="text-3xl sm:text-4xl font-extrabold text-emerald-400">100%</p>
+            <p class="text-sm font-semibold text-slate-200">Conformidade LGPD</p>
+            <p class="text-xs text-slate-400">Retenção de 5 anos, anonimização e RIPD</p>
+          </div>
+
+        </div>
+      </div>
+    </section>
+
+    <!-- ========================================================================
+         PROBLEM VS SOLUTION (Canais Informais vs HelpCorp)
+         ======================================================================== -->
+    <section id="solucao" class="py-20 lg:py-28 relative">
+      <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+        
+        <div class="text-center max-w-3xl mx-auto mb-16 space-y-4">
+          <h2 class="text-xs font-bold uppercase tracking-widest text-sky-400">O Diagnóstico Organizacional</h2>
+          <h3 class="text-3xl sm:text-4xl font-extrabold text-white">Por que o suporte por WhatsApp e e-mail sabota a sua empresa?</h3>
+          <p class="text-slate-300 text-base">
+            Segundo pesquisa realizada pela <strong>Gartner (2023)</strong>, empresas sem plataformas formais perdem em média 30% da produtividade em atendimentos não rastreados.
+          </p>
+        </div>
+
+        <div class="grid grid-cols-1 lg:grid-cols-2 gap-8 items-stretch">
+          
+          <!-- Column 1: O Caos Informal -->
+          <div class="rounded-2xl bg-rose-950/20 border border-rose-900/40 p-8 flex flex-col justify-between">
+            <div>
+              <div class="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-rose-500/10 border border-rose-500/20 text-rose-400 text-xs font-bold mb-6">
+                <span class="w-2 h-2 rounded-full bg-rose-500"></span>
+                O Cenário Atual Sem Plataforma Formal
+              </div>
+              <h4 class="text-2xl font-bold text-white mb-4">Canais Fragmentados & Desestruturados</h4>
+              
+              <ul class="space-y-4 text-sm text-slate-300">
+                <li class="flex items-start gap-3">
+                  <span class="w-5 h-5 rounded-full bg-rose-500/20 text-rose-400 flex items-center justify-center text-xs font-bold shrink-0 mt-0.5">✕</span>
+                  <span><strong>Perda frequente de solicitações:</strong> Mensagens no WhatsApp somem em grupos, e-mails caem no esquecimento e conversas de corredor não geram protocolo.</span>
+                </li>
+                <li class="flex items-start gap-3">
+                  <span class="w-5 h-5 rounded-full bg-rose-500/20 text-rose-400 flex items-center justify-center text-xs font-bold shrink-0 mt-0.5">✕</span>
+                  <span><strong>Invisibilidade de SLA e TMR:</strong> Gestores não sabem qual o tempo real de resolução nem conseguem medir cumprimento de prazos.</span>
+                </li>
+                <li class="flex items-start gap-3">
+                  <span class="w-5 h-5 rounded-full bg-rose-500/20 text-rose-400 flex items-center justify-center text-xs font-bold shrink-0 mt-0.5">✕</span>
+                  <span><strong>Sobrecarga e falta de triagem:</strong> Especialistas sêniores perdem horas respondendo a perguntas repetitivas de crachá e reset de senha.</span>
+                </li>
+                <li class="flex items-start gap-3">
+                  <span class="w-5 h-5 rounded-full bg-rose-500/20 text-rose-400 flex items-center justify-center text-xs font-bold shrink-0 mt-0.5">✕</span>
+                  <span><strong>Frustração do colaborador (Camila):</strong> Incerteza se a solicitação foi vista, ausência de prazos e cobranças manuais desgastantes.</span>
+                </li>
+                <li class="flex items-start gap-3">
+                  <span class="w-5 h-5 rounded-full bg-rose-500/20 text-rose-400 flex items-center justify-center text-xs font-bold shrink-0 mt-0.5">✕</span>
+                  <span><strong>Risco Jurídico de LGPD:</strong> Dados sensíveis compartilhados em chats pessoais sem registro imutável ou política de retenção.</span>
+                </li>
+              </ul>
+            </div>
+
+            <div class="mt-8 pt-6 border-t border-rose-900/30 text-xs text-rose-300 font-medium">
+              Consequência: Clima organizacional abalado, custos ocultos de suporte e perda de competitividade.
+            </div>
+          </div>
+
+          <!-- Column 2: A Solução HelpCorp -->
+          <div class="rounded-2xl bg-sky-950/30 border border-sky-500/30 p-8 flex flex-col justify-between relative overflow-hidden shadow-2xl shadow-sky-950/60">
+            <div class="absolute -top-12 -right-12 w-48 h-48 bg-sky-500/10 rounded-full blur-3xl pointer-events-none"></div>
+
+            <div>
+              <div class="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-sky-500/20 border border-sky-500/30 text-sky-300 text-xs font-bold mb-6">
+                <span class="w-2 h-2 rounded-full bg-emerald-400 pulse-active"></span>
+                A Abordagem HelpCorp IXM
+              </div>
+              <h4 class="text-2xl font-bold text-white mb-4">Hub Centralizado, Inteligente & Auditável</h4>
+              
+              <ul class="space-y-4 text-sm text-slate-200">
+                <li class="flex items-start gap-3">
+                  <span class="w-5 h-5 rounded-full bg-emerald-500/20 text-emerald-400 flex items-center justify-center text-xs font-bold shrink-0 mt-0.5">✓</span>
+                  <span><strong>Ponto Único de Contato Corporativo:</strong> Um único portal web e mobile para TI, RH, Financeiro, Facilities e Jurídico, acessível via SSO corporativo.</span>
+                </li>
+                <li class="flex items-start gap-3">
+                  <span class="w-5 h-5 rounded-full bg-emerald-500/20 text-emerald-400 flex items-center justify-center text-xs font-bold shrink-0 mt-0.5">✓</span>
+                  <span><strong>Triagem Automatizada por Inteligência Artificial:</strong> O PLN analisa o texto, categoriza o setor e determina a urgência antes do clique final.</span>
+                </li>
+                <li class="flex items-start gap-3">
+                  <span class="w-5 h-5 rounded-full bg-emerald-500/20 text-emerald-400 flex items-center justify-center text-xs font-bold shrink-0 mt-0.5">✓</span>
+                  <span><strong>SLA Dinâmico & Preditivo:</strong> Prazos realistas calculados com base na fila, histórico e disponibilidade da equipe, com alerta em 80% de consumo.</span>
+                </li>
+                <li class="flex items-start gap-3">
+                  <span class="w-5 h-5 rounded-full bg-emerald-500/20 text-emerald-400 flex items-center justify-center text-xs font-bold shrink-0 mt-0.5">✓</span>
+                  <span><strong>Transparência Total para os Colaboradores:</strong> Notificações push e e-mail automáticas a cada mudança de status, com pesquisa CSAT ao término.</span>
+                </li>
+                <li class="flex items-start gap-3">
+                  <span class="w-5 h-5 rounded-full bg-emerald-500/20 text-emerald-400 flex items-center justify-center text-xs font-bold shrink-0 mt-0.5">✓</span>
+                  <span><strong>Painel Executivo & BI (Ricardo Mendes):</strong> Dashboards em tempo real com exportação para PDF, Excel, Power BI e conformidade LGPD estrita de 5 anos.</span>
+                </li>
+              </ul>
+            </div>
+
+            <div class="mt-8 pt-6 border-t border-sky-500/30 flex items-center justify-between">
+              <span class="text-xs text-sky-300 font-semibold">Transformação digital com governança comprovada.</span>
+              <a href="#simulador" class="text-xs font-bold text-sky-400 hover:text-sky-200 underline">Experimentar na prática &rarr;</a>
+            </div>
+          </div>
+
+        </div>
+
+      </div>
+    </section>
+
+    <!-- ========================================================================
+         INTERACTIVE SIMULATOR (Core Feature for User & Evaluators)
+         ======================================================================== -->
+    <section id="simulador" class="py-20 lg:py-28 bg-[#0b101b] border-t border-slate-800">
+      <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+        
+        <div class="text-center max-w-3xl mx-auto mb-12 space-y-4">
+          <div class="inline-flex items-center gap-2 px-3 py-1 rounded-full badge-ai text-xs font-semibold">
+            <span>✨ Experiência Interativa em Tempo Real</span>
+          </div>
+          <h2 class="text-3xl sm:text-4xl font-extrabold text-white">Simulador Interativo da Plataforma HelpCorp</h2>
+          <p class="text-slate-300 text-base">
+            Veja na prática como a HelpCorp conecta as duas pontas da jornada corporativa: a colaboradora que precisa de agilidade e o gestor que precisa de controle e dados.
+          </p>
+
+          <!-- Interactive Mode Tabs -->
+          <div class="flex items-center justify-center gap-2 pt-4 flex-wrap">
+            <button data-sim-tab="solicitante" class="sim-tab-active px-5 py-2.5 rounded-xl text-sm font-semibold border border-transparent transition-all flex items-center gap-2">
+              <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M16 7a4 4 0 11-8 0 4 4 0 018 0zM12 14a7 7 0 00-7 7h14a7 7 0 00-7-7z"/></svg>
+              <span>1. Visão Solicitante (Camila • Marketing)</span>
+            </button>
+            <button data-sim-tab="gestor" class="text-slate-400 hover:text-slate-200 px-5 py-2.5 rounded-xl text-sm font-semibold border border-transparent transition-all flex items-center gap-2">
+              <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 19v-6a2 2 0 00-2-2H5a2 2 0 00-2 2v6a2 2 0 002 2h2a2 2 0 002-2zm0 0V9a2 2 0 012-2h2a2 2 0 012 2v10m-6 0a2 2 0 002 2h2a2 2 0 002-2m0 0V5a2 2 0 012-2h2a2 2 0 012 2v14a2 2 0 01-2 2h-2a2 2 0 01-2-2z"/></svg>
+              <span>2. Visão Gestor & TI (Ricardo • Coordenador)</span>
+            </button>
+            <button data-sim-tab="chatbot" class="text-slate-400 hover:text-slate-200 px-5 py-2.5 rounded-xl text-sm font-semibold border border-transparent transition-all flex items-center gap-2">
+              <svg class="w-4 h-4 text-purple-400" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M8 10h.01M12 10h.01M16 10h.01M9 16H5a2 2 0 01-2-2V6a2 2 0 012-2h14a2 2 0 012 2v8a2 2 0 01-2 2h-5l-5 5v-5z"/></svg>
+              <span>3. Chatbot IA Generativa (Autoatendimento)</span>
+            </button>
+          </div>
+        </div>
+
+        <!-- SIMULATOR CONTAINER -->
+        <div class="max-w-5xl mx-auto rounded-2xl glass-panel border border-slate-700/80 p-6 sm:p-8 shadow-2xl relative">
+          
+          <!-- TAB 1: VISÃO SOLICITANTE (CAMILA) -->
+          <div id="sim-solicitante" class="sim-tab-content space-y-6">
+            
+            <div class="flex items-center justify-between pb-4 border-b border-slate-800 flex-wrap gap-3">
+              <div class="flex items-center gap-3">
+                <div class="w-10 h-10 rounded-full bg-sky-500/20 border border-sky-400/30 flex items-center justify-center font-bold text-sky-400">CR</div>
+                <div>
+                  <h4 class="text-sm font-bold text-white">Camila Rodrigues <span class="text-xs font-normal text-slate-400">(Analista de Marketing Sênior)</span></h4>
+                  <p class="text-xs text-slate-400">Distribuidora Nacional de Alimentos S.A. • Autenticada via Google SSO</p>
+                </div>
+              </div>
+              <div class="text-xs bg-slate-800 px-3 py-1.5 rounded-lg text-slate-300">
+                <span>Modo: <strong>Abertura Rápida de Chamado</strong></span>
+              </div>
+            </div>
+
+            <!-- Quick Scenario Selectors -->
+            <div>
+              <p class="text-xs font-semibold text-slate-400 mb-2">Simular cenários reais do documento acadêmico:</p>
+              <div class="flex flex-wrap gap-2">
+                <button data-prefill="notebook" class="px-3 py-1.5 rounded-lg text-xs font-medium bg-slate-800 hover:bg-sky-950 border border-slate-700 hover:border-sky-500 text-slate-200 transition-colors">
+                  💻 Caso Camila: Notebook travou (Urgência Marketing)
+                </button>
+                <button data-prefill="reembolso" class="px-3 py-1.5 rounded-lg text-xs font-medium bg-slate-800 hover:bg-sky-950 border border-slate-700 hover:border-sky-500 text-slate-200 transition-colors">
+                  💵 Reembolso de Viagem Corporativa (Financeiro)
+                </button>
+                <button data-prefill="acesso" class="px-3 py-1.5 rounded-lg text-xs font-medium bg-slate-800 hover:bg-sky-950 border border-slate-700 hover:border-sky-500 text-slate-200 transition-colors">
+                  🔑 Liberação de Acesso ao SAP (TI Sistemas)
+                </button>
+              </div>
+            </div>
+
+            <!-- Ticket Input Field -->
+            <div class="space-y-2">
+              <label for="camila-desc" class="block text-xs font-semibold text-slate-300">
+                Descreva o problema ou necessidade <span class="text-purple-400 font-normal">(o motor de PLN analisará enquanto você digita)</span>:
+              </label>
+              <textarea id="camila-desc" rows="3" class="w-full bg-slate-900 border border-slate-700 rounded-xl p-4 text-sm text-slate-100 placeholder-slate-500 focus:outline-none focus:border-sky-500 transition-colors" placeholder="Digite aqui a sua demanda corporativa..."></textarea>
+              <div class="flex items-center justify-between text-xs text-slate-400 pt-1">
+                <span class="flex items-center gap-1">
+                  <svg class="w-3.5 h-3.5 text-slate-400" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15.172 7l-6.586 6.586a2 2 0 102.828 2.828l6.414-6.586a4 4 0 00-5.656-5.656l-6.415 6.585a6 6 0 108.486 8.486L20.5 13"/></svg>
+                  Anexos suportados: até 20MB (imagens, logs, documentos)
+                </span>
+                <span class="flex items-center gap-1 text-slate-400">
+                  <svg class="w-3.5 h-3.5 text-purple-400" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 11a7 7 0 01-7 7m0 0a7 7 0 01-7-7m7 7v4m0 0H8m4 0h4m-4-8a3 3 0 100-6 3 3 0 000 6z"/></svg>
+                  Gravação de áudio disponível no app mobile
+                </span>
+              </div>
+            </div>
+
+            <!-- Real-time AI Triage Card -->
+            <div id="ai-triage-box" class="rounded-xl bg-purple-950/20 border border-purple-500/30 p-4 transition-all">
+              <div class="flex items-center justify-between mb-3 pb-2 border-b border-purple-900/40">
+                <div class="flex items-center gap-2">
+                  <span class="w-2 h-2 rounded-full bg-purple-400 animate-pulse"></span>
+                  <span class="text-xs font-bold uppercase tracking-wider text-purple-300">Triagem Automática por Inteligência Artificial (PLN)</span>
+                </div>
+                <span class="text-[11px] text-purple-300 font-mono">Confiança IA: 98.7%</span>
+              </div>
+
+              <div class="grid grid-cols-1 sm:grid-cols-3 gap-3 text-xs mb-3">
+                <div class="p-2.5 rounded-lg bg-slate-900/80 border border-slate-800">
+                  <span class="text-slate-400 block mb-1">Categoria Prevista:</span>
+                  <div id="ai-category" class="font-bold text-sky-400">TI > Hardware > Notebooks</div>
+                </div>
+                <div class="p-2.5 rounded-lg bg-slate-900/80 border border-slate-800">
+                  <span class="text-slate-400 block mb-1">Nível de Urgência:</span>
+                  <div id="ai-urgency" class="font-bold text-rose-400">Crítica / Alta</div>
+                </div>
+                <div class="p-2.5 rounded-lg bg-slate-900/80 border border-slate-800">
+                  <span class="text-slate-400 block mb-1">SLA Preditivo:</span>
+                  <div id="ai-sla" class="font-bold text-emerald-400">4h úteis</div>
+                </div>
+              </div>
+
+              <!-- Suggested KB Article -->
+              <div class="p-3 rounded-lg bg-slate-900/60 border border-slate-800 flex items-start gap-2.5">
+                <span class="text-sm">💡</span>
+                <div class="text-xs">
+                  <span class="text-slate-400">Sugestão preventiva da Base de Conhecimento:</span>
+                  <p id="ai-kb-suggestion" class="text-sky-300 font-medium hover:underline cursor-pointer">Tutorial: 3 procedimentos para reinicialização forçada do Dell Latitude 5420</p>
+                </div>
+              </div>
+            </div>
+
+            <!-- Submit Button & Action Bar -->
+            <div class="flex items-center justify-between pt-2">
+              <div class="text-xs text-slate-400">
+                Campos adicionais específicos serão carregados dinamicamente com base no setor.
+              </div>
+              <button id="btn-submit-ticket" class="px-6 py-3 rounded-xl font-bold text-sm bg-gradient-to-r from-sky-500 to-blue-600 hover:from-sky-400 hover:to-blue-500 text-white shadow-lg shadow-sky-500/30 flex items-center transition-all">
+                Abrir Chamado Agora
+              </button>
+            </div>
+
+            <!-- Success Box (Initially Hidden) -->
+            <div id="ticket-success-box" class="hidden p-4 rounded-xl bg-emerald-950/30 border border-emerald-500/40 space-y-3">
+              <div class="flex items-center justify-between">
+                <div class="flex items-center gap-2">
+                  <span class="w-6 h-6 rounded-full bg-emerald-500/20 text-emerald-400 flex items-center justify-center font-bold text-xs">✓</span>
+                  <span class="text-sm font-bold text-white">Chamado #4821 Registrado com Sucesso!</span>
+                </div>
+                <span class="text-xs font-mono px-2 py-0.5 rounded bg-emerald-500/20 text-emerald-300">Status: Em Triagem</span>
+              </div>
+              <p class="text-xs text-slate-300 leading-relaxed">
+                Um e-mail e uma notificação push foram encaminhados para <strong>Camila Rodrigues</strong>. O chamado foi atribuído automaticamente para a fila do coordenador <strong>Ricardo Mendes</strong> (TI) com prazo limite de até 4 horas úteis.
+              </p>
+              <div class="flex items-center gap-3 pt-1">
+                <button data-sim-tab="gestor" class="text-xs font-semibold text-sky-400 hover:text-sky-300 underline">
+                  Alternar para a Visão de Ricardo e ver o chamado na fila &rarr;
+                </button>
+              </div>
+            </div>
+
+          </div>
+
+          <!-- TAB 2: VISÃO DO GESTOR (RICARDO MENDES - TI) -->
+          <div id="sim-gestor" class="sim-tab-content hidden space-y-6">
+            
+            <div class="flex items-center justify-between pb-4 border-b border-slate-800 flex-wrap gap-3">
+              <div class="flex items-center gap-3">
+                <div class="w-10 h-10 rounded-full bg-purple-500/20 border border-purple-400/30 flex items-center justify-center font-bold text-purple-400">RM</div>
+                <div>
+                  <h4 class="text-sm font-bold text-white">Ricardo Mendes <span class="text-xs font-normal text-slate-400">(Coordenador de TI & Suporte)</span></h4>
+                  <p class="text-xs text-slate-400">Gestor de 6 técnicos • ITIL Foundation • Modo Executivo Ativo</p>
+                </div>
+              </div>
+              <div class="flex items-center gap-2">
+                <span class="text-xs text-slate-400">Exportar Relatórios:</span>
+                <span class="px-2 py-1 rounded bg-slate-800 text-[11px] text-slate-300 font-mono">PDF</span>
+                <span class="px-2 py-1 rounded bg-slate-800 text-[11px] text-slate-300 font-mono">Excel</span>
+                <span class="px-2 py-1 rounded bg-slate-800 text-[11px] text-sky-400 font-mono">Power BI</span>
+              </div>
+            </div>
+
+            <!-- Operational Queue Filters -->
+            <div class="flex items-center justify-between flex-wrap gap-3">
+              <div class="flex items-center gap-2">
+                <span class="text-xs text-slate-400">Filtro de Fila:</span>
+                <button data-filter-queue="all" class="px-3 py-1 rounded-lg text-xs font-semibold bg-sky-500 text-white">Todos (4)</button>
+                <button data-filter-queue="ti" class="px-3 py-1 rounded-lg text-xs font-semibold bg-slate-800 text-slate-400 hover:text-white">TI (2)</button>
+                <button data-filter-queue="fin" class="px-3 py-1 rounded-lg text-xs font-semibold bg-slate-800 text-slate-400 hover:text-white">Financeiro (1)</button>
+                <button data-filter-queue="rh" class="px-3 py-1 rounded-lg text-xs font-semibold bg-slate-800 text-slate-400 hover:text-white">RH & Fac (1)</button>
+              </div>
+              <div class="text-xs text-slate-400 flex items-center gap-1.5">
+                <span class="w-2 h-2 rounded-full bg-emerald-400 animate-pulse"></span>
+                <span>Atualização automática a cada 5s</span>
+              </div>
+            </div>
+
+            <!-- Priority Ticket Queue List -->
+            <div class="space-y-3">
+              
+              <!-- Ticket 1 (Camila's notebook - Critical) -->
+              <div class="ticket-queue-item p-4 rounded-xl bg-slate-900 border border-rose-500/40 hover:border-rose-500 transition-all flex flex-col sm:flex-row items-start sm:items-center justify-between gap-4" data-sector="ti">
+                <div class="space-y-1">
+                  <div class="flex items-center gap-2 flex-wrap">
+                    <span class="px-2 py-0.5 rounded bg-rose-500/20 text-rose-300 text-[11px] font-bold border border-rose-500/30">#4821 CRÍTICO</span>
+                    <span class="text-xs text-slate-400">TI > Hardware > Notebook</span>
+                    <span class="text-xs text-slate-500">•</span>
+                    <span class="text-xs text-slate-300 font-medium">Camila Rodrigues (Marketing)</span>
+                  </div>
+                  <p class="text-sm font-semibold text-white">Notebook travou e não liga — Campanha com prazo iminente</p>
+                  <p class="text-xs text-slate-400">Técnico sugerido por competência: <strong>Lucas Silva</strong> (Hardware Lead)</p>
+                </div>
+                <div class="text-left sm:text-right shrink-0">
+                  <div class="text-xs font-bold text-rose-400 flex items-center gap-1 sm:justify-end">
+                    <svg class="w-3.5 h-3.5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 8v4l3 3m6-3a9 9 0 11-18 0 9 9 0 0118 0z"/></svg>
+                    <span>SLA Restante: 03h 48min</span>
+                  </div>
+                  <div class="w-32 bg-slate-800 h-1.5 rounded-full mt-1.5 overflow-hidden">
+                    <div class="bg-rose-500 h-full w-[85%]"></div>
+                  </div>
+                  <span class="text-[10px] text-slate-400 block mt-1">Alerta escalonamento ativo em 80%</span>
+                </div>
+              </div>
+
+              <!-- Ticket 2 (Acesso SAP) -->
+              <div class="ticket-queue-item p-4 rounded-xl bg-slate-900 border border-slate-800 hover:border-slate-700 transition-all flex flex-col sm:flex-row items-start sm:items-center justify-between gap-4" data-sector="ti">
+                <div class="space-y-1">
+                  <div class="flex items-center gap-2 flex-wrap">
+                    <span class="px-2 py-0.5 rounded bg-amber-500/20 text-amber-300 text-[11px] font-bold border border-amber-500/30">#4819 ALTA</span>
+                    <span class="text-xs text-slate-400">TI > Sistemas & ERP</span>
+                    <span class="text-xs text-slate-500">•</span>
+                    <span class="text-xs text-slate-300 font-medium">Fernando Dias (Comercial)</span>
+                  </div>
+                  <p class="text-sm font-semibold text-white">Liberação de perfil consultivo SAP para novos consultores</p>
+                  <p class="text-xs text-slate-400">Atribuído a: <strong>Mariana Costa</strong></p>
+                </div>
+                <div class="text-left sm:text-right shrink-0">
+                  <div class="text-xs font-bold text-amber-400 flex items-center gap-1 sm:justify-end">
+                    <svg class="w-3.5 h-3.5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 8v4l3 3m6-3a9 9 0 11-18 0 9 9 0 0118 0z"/></svg>
+                    <span>SLA Restante: 05h 12min</span>
+                  </div>
+                  <div class="w-32 bg-slate-800 h-1.5 rounded-full mt-1.5 overflow-hidden">
+                    <div class="bg-amber-500 h-full w-[55%]"></div>
+                  </div>
+                </div>
+              </div>
+
+              <!-- Ticket 3 (Financeiro) -->
+              <div class="ticket-queue-item p-4 rounded-xl bg-slate-900 border border-slate-800 hover:border-slate-700 transition-all flex flex-col sm:flex-row items-start sm:items-center justify-between gap-4" data-sector="fin">
+                <div class="space-y-1">
+                  <div class="flex items-center gap-2 flex-wrap">
+                    <span class="px-2 py-0.5 rounded bg-sky-500/20 text-sky-300 text-[11px] font-bold border border-sky-500/30">#4815 NORMAL</span>
+                    <span class="text-xs text-slate-400">Financeiro > Contas a Pagar</span>
+                    <span class="text-xs text-slate-500">•</span>
+                    <span class="text-xs text-slate-300 font-medium">Renata Silveira (Logística)</span>
+                  </div>
+                  <p class="text-sm font-semibold text-white">Reembolso despesas de viagem de visita ao armazém</p>
+                  <p class="text-xs text-slate-400">Atribuído a: <strong>Equipe Financeira</strong></p>
+                </div>
+                <div class="text-left sm:text-right shrink-0">
+                  <div class="text-xs font-bold text-emerald-400 flex items-center gap-1 sm:justify-end">
+                    <span>SLA Restante: 22h 30min</span>
+                  </div>
+                  <div class="w-32 bg-slate-800 h-1.5 rounded-full mt-1.5 overflow-hidden">
+                    <div class="bg-emerald-500 h-full w-[20%]"></div>
+                  </div>
+                </div>
+              </div>
+
+              <!-- Ticket 4 (RH / Facilities) -->
+              <div class="ticket-queue-item p-4 rounded-xl bg-slate-900 border border-slate-800 hover:border-slate-700 transition-all flex flex-col sm:flex-row items-start sm:items-center justify-between gap-4" data-sector="rh">
+                <div class="space-y-1">
+                  <div class="flex items-center gap-2 flex-wrap">
+                    <span class="px-2 py-0.5 rounded bg-emerald-500/20 text-emerald-300 text-[11px] font-bold border border-emerald-500/30">#4810 BAIXA</span>
+                    <span class="text-xs text-slate-400">Facilities > Acesso Predial</span>
+                    <span class="text-xs text-slate-500">•</span>
+                    <span class="text-xs text-slate-300 font-medium">Carlos Eduardo (Engenharia)</span>
+                  </div>
+                  <p class="text-sm font-semibold text-white">Segunda via de crachá com foto</p>
+                  <p class="text-xs text-slate-400">Status: <strong>Aguardando confecção</strong></p>
+                </div>
+                <div class="text-left sm:text-right shrink-0">
+                  <div class="text-xs font-bold text-emerald-400 flex items-center gap-1 sm:justify-end">
+                    <span>SLA Restante: 44h 00min</span>
+                  </div>
+                  <div class="w-32 bg-slate-800 h-1.5 rounded-full mt-1.5 overflow-hidden">
+                    <div class="bg-emerald-500 h-full w-[10%]"></div>
+                  </div>
+                </div>
+              </div>
+
+            </div>
+
+            <!-- Gamification & Leaderboard Preview (Document Section 6.8) -->
+            <div class="p-4 rounded-xl bg-gradient-to-r from-slate-900 to-indigo-950/40 border border-indigo-500/30 flex items-center justify-between flex-wrap gap-4">
+              <div class="flex items-center gap-3">
+                <span class="text-2xl">🏆</span>
+                <div>
+                  <h5 class="text-xs font-bold uppercase tracking-wider text-indigo-300">Gamificação para Equipes (Deterding et al. 2011)</h5>
+                  <p class="text-xs text-slate-300">Técnicos com maior índice de resolução dentro do SLA ganham badges e reconhecimento.</p>
+                </div>
+              </div>
+              <div class="flex items-center gap-3 text-xs">
+                <div class="flex items-center gap-1.5 bg-slate-800 px-2.5 py-1 rounded-lg">
+                  <span class="text-amber-400 font-bold">🥇 Lucas Silva</span>
+                  <span class="text-[10px] text-slate-400">Badge Águia SLA</span>
+                </div>
+                <div class="flex items-center gap-1.5 bg-slate-800 px-2.5 py-1 rounded-lg">
+                  <span class="text-slate-300 font-bold">🥈 Mariana Costa</span>
+                  <span class="text-[10px] text-slate-400">CSAT 5 Estrelas</span>
+                </div>
+              </div>
+            </div>
+
+          </div>
+
+          <!-- TAB 3: CHATBOT COM IA GENERATIVA (AUTOATENDIMENTO) -->
+          <div id="sim-chatbot" class="sim-tab-content hidden space-y-4">
+            
+            <div class="flex items-center justify-between pb-3 border-b border-slate-800">
+              <div class="flex items-center gap-3">
+                <div class="w-9 h-9 rounded-full bg-purple-600 flex items-center justify-center font-bold text-white shadow-lg shadow-purple-500/30">IA</div>
+                <div>
+                  <h4 class="text-sm font-bold text-white">HelpCorp AI Assistant</h4>
+                  <p class="text-xs text-purple-300">Alimentado por LLM corporativo com base de conhecimento curada</p>
+                </div>
+              </div>
+              <span class="text-[11px] px-2.5 py-1 rounded-full bg-emerald-500/20 text-emerald-300 border border-emerald-500/30 flex items-center gap-1.5">
+                <span class="w-2 h-2 rounded-full bg-emerald-400"></span>
+                Resolve até 35% sem técnico
+              </span>
+            </div>
+
+            <!-- Prompt suggestions -->
+            <div>
+              <p class="text-xs text-slate-400 mb-2">Clique para testar perguntas rápidas da rotina corporativa:</p>
+              <div class="flex flex-wrap gap-2">
+                <button data-chat-prompt="como solicitar cracha novo" class="px-3 py-1 rounded-lg text-xs bg-slate-800 hover:bg-slate-700 text-slate-300 border border-slate-700 transition-colors">
+                  "Como solicitar crachá novo?"
+                </button>
+                <button data-chat-prompt="como pedir reembolso de viagem" class="px-3 py-1 rounded-lg text-xs bg-slate-800 hover:bg-slate-700 text-slate-300 border border-slate-700 transition-colors">
+                  "Como pedir reembolso de viagem?"
+                </button>
+                <button data-chat-prompt="notebook travou e nao liga" class="px-3 py-1 rounded-lg text-xs bg-slate-800 hover:bg-slate-700 text-slate-300 border border-slate-700 transition-colors">
+                  "Meu notebook travou e não liga"
+                </button>
+              </div>
+            </div>
+
+            <!-- Chat Message History Window -->
+            <div id="chat-messages" class="h-64 overflow-y-auto bg-slate-900/90 border border-slate-800 rounded-xl p-4 space-y-3.5 text-xs sm:text-sm">
+              
+              <!-- System Intro Message -->
+              <div class="flex items-start gap-2.5">
+                <div class="w-8 h-8 rounded-full bg-purple-600 flex items-center justify-center text-xs font-bold text-white shrink-0">IA</div>
+                <div class="p-3.5 bg-slate-800/90 border border-purple-500/20 rounded-e-xl rounded-es-xl text-slate-200 max-w-[360px] leading-relaxed">
+                  Olá, Camila! Sou o assistente inteligente da HelpCorp. Posso tirar dúvidas institucionais ou abrir chamados estruturados para TI, RH e Financeiro. Como posso ajudar hoje?
+                </div>
+              </div>
+
+            </div>
+
+            <!-- Chat Input Box -->
+            <div class="flex gap-2">
+              <input id="chat-input" type="text" placeholder="Escreva uma dúvida ou solicitação corporativa..." class="flex-1 bg-slate-900 border border-slate-700 rounded-xl px-4 py-3 text-xs sm:text-sm text-slate-100 placeholder-slate-500 focus:outline-none focus:border-purple-500 transition-colors">
+              <button id="chat-send-btn" class="px-5 py-3 rounded-xl bg-purple-600 hover:bg-purple-500 text-white font-semibold text-xs sm:text-sm transition-all shadow-lg shadow-purple-600/30 flex items-center gap-1.5">
+                <span>Enviar</span>
+                <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 19l9 2-9-18-9 18 9-2zm0 0v-8"/></svg>
+              </button>
+            </div>
+
+          </div>
+
+        </div>
+
+      </div>
+    </section>
+
+    <!-- ========================================================================
+         INOVAÇÃO & DIFERENCIAIS COMPETITIVOS
+         ======================================================================== -->
+    <section id="diferenciais" class="py-20 lg:py-28 relative feature-glow">
+      <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+        
+        <div class="text-center max-w-3xl mx-auto mb-16 space-y-4">
+          <div class="inline-flex items-center gap-2 px-3 py-1 rounded-full badge-ai text-xs font-semibold">
+            <span>Diferenciais Competitivos • Inovação Enterprise</span>
+          </div>
+          <h2 class="text-3xl sm:text-4xl font-extrabold text-white">Por que a HelpCorp é superior às ferramentas tradicionais?</h2>
+          <p class="text-slate-300 text-base">
+            Concebida não apenas como um help desk convencional, mas como uma plataforma de <strong>Gestão de Experiência Interna (IXM)</strong> sob medida para o mercado brasileiro.
+          </p>
+        </div>
+
+        <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+          
+          <!-- Card 1: IA para Triagem e Sugestão -->
+          <div class="rounded-2xl glass-panel p-6 glass-panel-hover border border-slate-700/60 flex flex-col justify-between">
+            <div class="space-y-3">
+              <div class="w-12 h-12 rounded-xl bg-purple-500/20 border border-purple-400/30 flex items-center justify-center text-purple-400">
+                <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13 10V3L4 14h7v7l9-11h-7z"/></svg>
+              </div>
+              <h3 class="text-lg font-bold text-white">IA para Triagem e Sugestão (PLN)</h3>
+              <p class="text-xs sm:text-sm text-slate-300 leading-relaxed">
+                Motor de processamento de linguagem natural que lê a descrição do usuário, define a categoria, o nível de urgência e sugere artigos antes mesmo de finalizar o envio.
+              </p>
+            </div>
+            <div class="pt-4 mt-4 border-t border-slate-800 text-xs text-purple-300 font-semibold">
+              Reduz erros humanos de categorização em até 85%.
+            </div>
+          </div>
+
+          <!-- Card 2: Chatbot com IA Generativa -->
+          <div class="rounded-2xl glass-panel p-6 glass-panel-hover border border-slate-700/60 flex flex-col justify-between">
+            <div class="space-y-3">
+              <div class="w-12 h-12 rounded-xl bg-sky-500/20 border border-sky-400/30 flex items-center justify-center text-sky-400">
+                <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M8 10h.01M12 10h.01M16 10h.01M9 16H5a2 2 0 01-2-2V6a2 2 0 012-2h14a2 2 0 012 2v8a2 2 0 01-2 2h-5l-5 5v-5z"/></svg>
+              </div>
+              <h3 class="text-lg font-bold text-white">Chatbot com IA Generativa (LLM)</h3>
+              <p class="text-xs sm:text-sm text-slate-300 leading-relaxed">
+                Assistente conversacional que compreende solicitações em linguagem natural como se fosse mensagem instantânea e consulta a base de conhecimento corporativa.
+              </p>
+            </div>
+            <div class="pt-4 mt-4 border-t border-slate-800 text-xs text-sky-300 font-semibold">
+              Desafoga a equipe resolvendo até 35% das filas.
+            </div>
+          </div>
+
+          <!-- Card 3: SLA Dinâmico e Preditivo -->
+          <div class="rounded-2xl glass-panel p-6 glass-panel-hover border border-slate-700/60 flex flex-col justify-between">
+            <div class="space-y-3">
+              <div class="w-12 h-12 rounded-xl bg-emerald-500/20 border border-emerald-400/30 flex items-center justify-center text-emerald-400">
+                <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 8v4l3 3m6-3a9 9 0 11-18 0 9 9 0 0118 0z"/></svg>
+              </div>
+              <h3 class="text-lg font-bold text-white">SLA Dinâmico & Preditivo</h3>
+              <p class="text-xs sm:text-sm text-slate-300 leading-relaxed">
+                Diferente dos prazos estáticos e ilusórios de ferramentas legadas, a HelpCorp calcula prazos realistas considerando volume em aberto, equipe disponível e sazonalidade.
+              </p>
+            </div>
+            <div class="pt-4 mt-4 border-t border-slate-800 text-xs text-emerald-300 font-semibold">
+              Previsibilidade exata comunicada ao solicitante.
+            </div>
+          </div>
+
+          <!-- Card 4: Base com Curadoria Automática -->
+          <div class="rounded-2xl glass-panel p-6 glass-panel-hover border border-slate-700/60 flex flex-col justify-between">
+            <div class="space-y-3">
+              <div class="w-12 h-12 rounded-xl bg-amber-500/20 border border-amber-400/30 flex items-center justify-center text-amber-400">
+                <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 6.253v13m0-13C10.832 5.477 9.246 5 7.5 5S4.168 5.477 3 6.253v13C4.168 18.477 5.754 18 7.5 18s3.332.477 4.5 1.253m0-13C13.168 5.477 14.754 5 16.5 5c1.747 0 3.332.477 4.5 1.253v13C19.832 18.477 18.247 18 16.5 18c-1.746 0-3.332.477-4.5 1.253"/></svg>
+              </div>
+              <h3 class="text-lg font-bold text-white">Curadoria Automática de Artigos</h3>
+              <p class="text-xs sm:text-sm text-slate-300 leading-relaxed">
+                A plataforma aprende continuamente com os chamados encerrados, detecta padrões recorrentes e propõe ao gestor a criação automática de novos artigos e FAQs.
+              </p>
+            </div>
+            <div class="pt-4 mt-4 border-t border-slate-800 text-xs text-amber-300 font-semibold">
+              A empresa constrói conhecimento sem esforço manual.
+            </div>
+          </div>
+
+          <!-- Card 5: Mobile-First e Modo Offline -->
+          <div class="rounded-2xl glass-panel p-6 glass-panel-hover border border-slate-700/60 flex flex-col justify-between">
+            <div class="space-y-3">
+              <div class="w-12 h-12 rounded-xl bg-blue-500/20 border border-blue-400/30 flex items-center justify-center text-blue-400">
+                <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 18h.01M8 21h8a2 2 0 002-2V5a2 2 0 00-2-2H8a2 2 0 00-2 2v14a2 2 0 002 2z"/></svg>
+              </div>
+              <h3 class="text-lg font-bold text-white">Experiência Mobile-First & Offline</h3>
+              <p class="text-xs sm:text-sm text-slate-300 leading-relaxed">
+                Aplicativo nativo para iOS e Android com sincronização offline. Perfeito para colaboradores em trânsito e técnicos de campo que atendem galpões e filiais.
+              </p>
+            </div>
+            <div class="pt-4 mt-4 border-t border-slate-800 text-xs text-blue-300 font-semibold">
+              Garante registro mesmo com sinal intermitente.
+            </div>
+          </div>
+
+          <!-- Card 6: Gamificação para Equipes -->
+          <div class="rounded-2xl glass-panel p-6 glass-panel-hover border border-slate-700/60 flex flex-col justify-between">
+            <div class="space-y-3">
+              <div class="w-12 h-12 rounded-xl bg-rose-500/20 border border-rose-400/30 flex items-center justify-center text-rose-400">
+                <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12l2 2 4-4M7.835 4.697a3.42 3.42 0 001.946-.806 3.42 3.42 0 014.438 0 3.42 3.42 0 001.946.806 3.42 3.42 0 013.138 3.138 3.42 3.42 0 00.806 1.946 3.42 3.42 0 010 4.438 3.42 3.42 0 00-.806 1.946 3.42 3.42 0 01-3.138 3.138 3.42 3.42 0 00-1.946.806 3.42 3.42 0 01-4.438 0 3.42 3.42 0 00-1.946-.806 3.42 3.42 0 01-3.138-3.138 3.42 3.42 0 00-.806-1.946 3.42 3.42 0 010-4.438 3.42 3.42 0 00.806-1.946 3.42 3.42 0 013.138-3.138z"/></svg>
+              </div>
+              <h3 class="text-lg font-bold text-white">Gamificação & Engajamento</h3>
+              <p class="text-xs sm:text-sm text-slate-300 leading-relaxed">
+                Baseada nos estudos de <em>Deterding et al. (2011)</em>, incorpora badges por metas de SLA batidas, desafios de redução de backlog e rankings de satisfação CSAT.
+              </p>
+            </div>
+            <div class="pt-4 mt-4 border-t border-slate-800 text-xs text-rose-300 font-semibold">
+              Aumento de até 48% na motivação das equipes.
+            </div>
+          </div>
+
+        </div>
+
+      </div>
+    </section>
+
+    <!-- ========================================================================
+         OS 7 MÓDULOS DA PLATAFORMA (Arquitetura Funcional)
+         ======================================================================== -->
+    <section id="modulos" class="py-20 lg:py-28 bg-[#090e17] border-t border-slate-800">
+      <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+        
+        <div class="text-center max-w-3xl mx-auto mb-16 space-y-4">
+          <h2 class="text-xs font-bold uppercase tracking-widest text-sky-400">Arquitetura Completa</h2>
+          <h3 class="text-3xl sm:text-4xl font-extrabold text-white">Os 7 Módulos Estruturais do HelpCorp</h3>
+          <p class="text-slate-300 text-base">
+            Desenvolvido conforme princípios de especificação de requisitos funcionais de Sommerville (2019), garantindo modularidade e expansão corporativa contínua.
+          </p>
+        </div>
+
+        <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+          
+          <!-- Módulo 5.1 -->
+          <div class="p-6 rounded-2xl bg-slate-900/60 border border-slate-800 space-y-3">
+            <span class="text-xs font-mono font-bold text-sky-400">MÓDULO 5.1</span>
+            <h4 class="text-base font-bold text-white">Gestão & Cadastro de Usuários</h4>
+            <ul class="text-xs text-slate-400 space-y-1.5 list-disc list-inside">
+              <li>Importação em massa CSV e Active Directory / LDAP</li>
+              <li>Single Sign-On (Google Workspace, Azure AD, Okta)</li>
+              <li>Autenticação de Dois Fatores (2FA) configurável</li>
+              <li>Perfis: Solicitante, Atendente, Gestor, Admin e Auditor</li>
+            </ul>
+          </div>
+
+          <!-- Módulo 5.2 -->
+          <div class="p-6 rounded-2xl bg-slate-900/60 border border-slate-800 space-y-3">
+            <span class="text-xs font-mono font-bold text-sky-400">MÓDULO 5.2</span>
+            <h4 class="text-base font-bold text-white">Abertura Dinâmica de Chamados</h4>
+            <ul class="text-xs text-slate-400 space-y-1.5 list-disc list-inside">
+              <li>Formulários adaptativos com campos condicionais</li>
+              <li>Árvore hierárquica (ex: TI > Hardware > Notebook)</li>
+              <li>Anexo de até 20MB por chamado (fotos, logs, relatórios)</li>
+              <li>Gravação de áudio e abertura em nome de terceiros</li>
+            </ul>
+          </div>
+
+          <!-- Módulo 5.3 -->
+          <div class="p-6 rounded-2xl bg-slate-900/60 border border-slate-800 space-y-3">
+            <span class="text-xs font-mono font-bold text-sky-400">MÓDULO 5.3</span>
+            <h4 class="text-base font-bold text-white">Priorização & Matriz Inteligente</h4>
+            <ul class="text-xs text-slate-400 space-y-1.5 list-disc list-inside">
+              <li>Matriz de prioridade cruzando Urgência × Impacto</li>
+              <li>Fila visual com contagem regressiva de SLA em tempo real</li>
+              <li>Alerta de escalonamento ao atingir 80% do tempo</li>
+              <li>Distribuição por competência técnica e disponibilidade</li>
+            </ul>
+          </div>
+
+          <!-- Módulo 5.4 -->
+          <div class="p-6 rounded-2xl bg-slate-900/60 border border-slate-800 space-y-3">
+            <span class="text-xs font-mono font-bold text-sky-400">MÓDULO 5.4</span>
+            <h4 class="text-base font-bold text-white">Dashboard Gerencial em Tempo Real</h4>
+            <ul class="text-xs text-slate-400 space-y-1.5 list-disc list-inside">
+              <li>Visão unificada: em aberto, em atendimento e concluídos</li>
+              <li>Indicadores ao vivo: volume, TMR médio, % SLA e CSAT</li>
+              <li>Mapa de calor de demandas por setor e horário de pico</li>
+              <li>Modo de apresentação executiva para reuniões de diretoria</li>
+            </ul>
+          </div>
+
+          <!-- Módulo 5.5 -->
+          <div class="p-6 rounded-2xl bg-slate-900/60 border border-slate-800 space-y-3">
+            <span class="text-xs font-mono font-bold text-sky-400">MÓDULO 5.5</span>
+            <h4 class="text-base font-bold text-white">Notificações Automáticas Multicanal</h4>
+            <ul class="text-xs text-slate-400 space-y-1.5 list-disc list-inside">
+              <li>Notificação push nativa (mobile) e e-mail a cada etapa</li>
+              <li>Alerta instantâneo quando o chamado é designado</li>
+              <li>Resumo diário por e-mail com pendências do atendente</li>
+              <li>Central de preferências customizável pelo próprio usuário</li>
+            </ul>
+          </div>
+
+          <!-- Módulo 5.6 & 5.7 -->
+          <div class="p-6 rounded-2xl bg-slate-900/60 border border-slate-800 space-y-3">
+            <span class="text-xs font-mono font-bold text-sky-400">MÓDULOS 5.6 & 5.7</span>
+            <h4 class="text-base font-bold text-white">Histórico, Auditoria & BI</h4>
+            <ul class="text-xs text-slate-400 space-y-1.5 list-disc list-inside">
+              <li>Linha do tempo visual e registro imutável de mensagens</li>
+              <li>Exportação de relatórios em PDF, Excel (.xlsx) e CSV</li>
+              <li>Integração nativa com Power BI e Tableau</li>
+              <li>Retenção mínima de 5 anos em total conformidade LGPD</li>
+            </ul>
+          </div>
+
+        </div>
+
+      </div>
+    </section>
+
+    <!-- ========================================================================
+         CALCULADORA DE ROI INTERATIVA
+         ======================================================================== -->
+    <section id="roi" class="py-20 lg:py-28 bg-[#0b111e] border-t border-slate-800">
+      <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+        
+        <div class="text-center max-w-3xl mx-auto mb-16 space-y-4">
+          <div class="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-emerald-500/10 border border-emerald-500/20 text-emerald-400 text-xs font-bold">
+            <span>Retorno Sobre o Investimento</span>
+          </div>
+          <h2 class="text-3xl sm:text-4xl font-extrabold text-white">Calcule a economia da sua empresa com a HelpCorp</h2>
+          <p class="text-slate-300 text-base">
+            Arraste o slider para simular os ganhos de produtividade e horas economizadas pela sua organização conforme os dados da pesquisa.
+          </p>
+        </div>
+
+        <div class="max-w-4xl mx-auto rounded-2xl glass-panel border border-slate-700/80 p-6 sm:p-10 shadow-2xl">
+          
+          <!-- Slider Control -->
+          <div class="space-y-4 mb-8">
+            <div class="flex items-center justify-between">
+              <label for="roi-employees" class="text-sm font-bold text-slate-200">Número de Colaboradores na Empresa:</label>
+              <div class="text-2xl font-extrabold text-sky-400 font-mono">
+                <span id="roi-employees-count">500</span> colaboradores
+              </div>
+            </div>
+            <input id="roi-employees" type="range" min="100" max="3000" step="50" value="500">
+            <div class="flex justify-between text-[11px] text-slate-500">
+              <span>100 (Médio Porte)</span>
+              <span>1.000</span>
+              <span>2.000</span>
+              <span>3.000+ (Grande Porte)</span>
+            </div>
+          </div>
+
+          <!-- Dynamic Calculations Results Grid -->
+          <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4 text-center">
+            
+            <div class="p-4 rounded-xl bg-slate-900 border border-slate-800">
+              <p class="text-xs text-slate-400">Chamados Médios Estimados</p>
+              <p id="roi-tickets-month" class="text-2xl font-extrabold text-white mt-1">600</p>
+              <span class="text-[11px] text-slate-500">solicitações/mês</span>
+            </div>
+
+            <div class="p-4 rounded-xl bg-slate-900 border border-purple-500/30">
+              <p class="text-xs text-purple-300">Resolvidos por IA (35%)</p>
+              <p id="roi-ai-resolved" class="text-2xl font-extrabold text-purple-400 mt-1">210/mês</p>
+              <span class="text-[11px] text-slate-500">sem ocupar analista</span>
+            </div>
+
+            <div class="p-4 rounded-xl bg-slate-900 border border-sky-500/30">
+              <p class="text-xs text-sky-300">Horas Poupadas por Mês</p>
+              <p id="roi-hours-saved" class="text-2xl font-extrabold text-sky-400 mt-1">651h/mês</p>
+              <span class="text-[11px] text-slate-500">-40% no TMR geral</span>
+            </div>
+
+            <div class="p-4 rounded-xl bg-slate-900 border border-emerald-500/30">
+              <p class="text-xs text-emerald-300">Economia Anual Estimada</p>
+              <p id="roi-money-saved" class="text-2xl font-extrabold text-emerald-400 mt-1">R$ 429.660</p>
+              <span class="text-[11px] text-slate-500">em ganho de capacidade</span>
+            </div>
+
+          </div>
+
+          <div class="mt-8 pt-6 border-t border-slate-800 flex flex-col sm:flex-row items-center justify-between gap-4">
+            <p class="text-xs text-slate-400 max-w-lg">
+              * Estimativa com base em 1,2 chamados/colaborador/mês, redução de 40% no TMR e custo médio/hora de suporte conforme referências de mercado de TI e RH.
+            </p>
+            <button data-open-demo-modal class="px-6 py-3 rounded-xl font-bold text-xs bg-emerald-500 hover:bg-emerald-400 text-slate-950 transition-colors shrink-0 shadow-lg shadow-emerald-500/20">
+              Receber Diagnóstico de ROI Detalhado
+            </button>
+          </div>
+
+        </div>
+
+      </div>
+    </section>
+
+    <!-- ========================================================================
+         ECOSSISTEMA DE INTEGRAÇÕES NATIVAS (Seção 6.7)
+         ======================================================================== -->
+    <section class="py-16 bg-[#090e17] border-t border-slate-800">
+      <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 text-center space-y-6">
+        <p class="text-xs uppercase font-bold tracking-widest text-slate-400">
+          Integração Nativa com os Principais Sistemas Corporativos (OpenAPI 3.0 & Webhooks)
+        </p>
+        
+        <div class="flex flex-wrap items-center justify-center gap-6 sm:gap-10 pt-2 opacity-80">
+          <div class="px-4 py-2 rounded-xl bg-slate-900 border border-slate-800 text-slate-300 font-bold text-sm tracking-wider">
+            SAP ERP
+          </div>
+          <div class="px-4 py-2 rounded-xl bg-slate-900 border border-slate-800 text-slate-300 font-bold text-sm tracking-wider">
+            TOTVS Protheus
+          </div>
+          <div class="px-4 py-2 rounded-xl bg-slate-900 border border-slate-800 text-slate-300 font-bold text-sm tracking-wider">
+            Microsoft 365 & Teams
+          </div>
+          <div class="px-4 py-2 rounded-xl bg-slate-900 border border-slate-800 text-slate-300 font-bold text-sm tracking-wider">
+            Google Workspace
+          </div>
+          <div class="px-4 py-2 rounded-xl bg-slate-900 border border-slate-800 text-slate-300 font-bold text-sm tracking-wider">
+            Slack Corporate
+          </div>
+          <div class="px-4 py-2 rounded-xl bg-slate-900 border border-slate-800 text-slate-300 font-bold text-sm tracking-wider">
+            Senior Sistemas
+          </div>
+          <div class="px-4 py-2 rounded-xl bg-slate-900 border border-slate-800 text-slate-300 font-bold text-sm tracking-wider">
+            ADP RH
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- ========================================================================
+         SEGURANÇA & CONFORMIDADE LGPD (Seção 6.6)
+         ======================================================================== -->
+    <section id="lgpd" class="py-20 lg:py-28 bg-[#0b101b] border-t border-slate-800">
+      <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+        
+        <div class="grid grid-cols-1 lg:grid-cols-2 gap-12 items-center">
+          
+          <div class="space-y-6">
+            <div class="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-emerald-500/10 border border-emerald-500/20 text-emerald-400 text-xs font-bold">
+              <span>Segurança Corporativa & Privacidade</span>
+            </div>
+            <h2 class="text-3xl sm:text-4xl font-extrabold text-white">
+              Em total conformidade com a LGPD (Lei nº 13.709/2018)
+            </h2>
+            <p class="text-slate-300 text-base leading-relaxed">
+              Diferente de canais informais onde dados cadastrais, folhas de pagamento e atestados médicos trafegam sem controle, a HelpCorp foi arquitetada desde a raiz com princípios de <em>Privacy by Design</em>.
+            </p>
+
+            <div class="space-y-3 text-sm text-slate-300">
+              <div class="flex items-start gap-3">
+                <span class="w-5 h-5 rounded-full bg-emerald-500/20 text-emerald-400 flex items-center justify-center text-xs font-bold shrink-0 mt-0.5">🔒</span>
+                <span><strong>Criptografia Militar:</strong> Dados protegidos em trânsito com TLS 1.3 e em repouso com algoritmo AES-256 bits.</span>
+              </div>
+              <div class="flex items-start gap-3">
+                <span class="w-5 h-5 rounded-full bg-emerald-500/20 text-emerald-400 flex items-center justify-center text-xs font-bold shrink-0 mt-0.5">🛡️</span>
+                <span><strong>Portal de Privacidade do Titular:</strong> Atendimento simplificado para pedidos de consulta, anonimização e exclusão de dados pessoais.</span>
+              </div>
+              <div class="flex items-start gap-3">
+                <span class="w-5 h-5 rounded-full bg-emerald-500/20 text-emerald-400 flex items-center justify-center text-xs font-bold shrink-0 mt-0.5">📋</span>
+                <span><strong>Relatório de Impacto (RIPD):</strong> Documentação completa pré-elaborada pronta para auditorias internas e governança corporativa.</span>
+              </div>
+              <div class="flex items-start gap-3">
+                <span class="w-5 h-5 rounded-full bg-emerald-500/20 text-emerald-400 flex items-center justify-center text-xs font-bold shrink-0 mt-0.5">⏳</span>
+                <span><strong>Retenção Configurável:</strong> Histórico e trilha de auditoria preservados pelo período legal mínimo de 5 anos.</span>
+              </div>
+            </div>
+          </div>
+
+          <!-- Security Badge Card -->
+          <div class="p-8 rounded-2xl glass-panel border border-slate-700 space-y-6">
+            <h4 class="text-lg font-bold text-white flex items-center gap-2">
+              <span class="text-emerald-400">✓</span> Selo de Conformidade Corporativa HelpCorp
+            </h4>
+            
+            <div class="grid grid-cols-2 gap-4 text-xs font-mono">
+              <div class="p-3 rounded-xl bg-slate-900 border border-slate-800">
+                <span class="text-slate-400 block">Criptografia em Trânsito</span>
+                <span class="text-emerald-400 font-bold">TLS 1.3 Strict</span>
+              </div>
+              <div class="p-3 rounded-xl bg-slate-900 border border-slate-800">
+                <span class="text-slate-400 block">Criptografia em Repouso</span>
+                <span class="text-emerald-400 font-bold">AES-256 GCM</span>
+              </div>
+              <div class="p-3 rounded-xl bg-slate-900 border border-slate-800">
+                <span class="text-slate-400 block">Autenticação Corporativa</span>
+                <span class="text-sky-400 font-bold">SAML 2.0 / OIDC</span>
+              </div>
+              <div class="p-3 rounded-xl bg-slate-900 border border-slate-800">
+                <span class="text-slate-400 block">Auditoria de Acesso</span>
+                <span class="text-sky-400 font-bold">Logs Imutáveis</span>
+              </div>
+            </div>
+
+            <div class="p-4 rounded-xl bg-emerald-950/20 border border-emerald-500/30 text-xs text-slate-300">
+              "A anonimização automática de dados nos relatórios gerenciais exportados assegura que a diretoria visualize métricas estratégicas sem expor informações sigilosas dos colaboradores."
+            </div>
+          </div>
+
+        </div>
+
+      </div>
+    </section>
+
+    <!-- ========================================================================
+         FAQ (Perguntas Frequentes)
+         ======================================================================== -->
+    <section class="py-20 lg:py-28 bg-[#090e17] border-t border-slate-800">
+      <div class="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8">
+        
+        <div class="text-center mb-16 space-y-4">
+          <h2 class="text-xs font-bold uppercase tracking-widest text-sky-400">Dúvidas Frequentes</h2>
+          <h3 class="text-3xl sm:text-4xl font-extrabold text-white">Tudo o que você precisa saber sobre a HelpCorp</h3>
+        </div>
+
+        <div class="space-y-4">
+          
+          <!-- FAQ 1 -->
+          <div class="rounded-xl bg-slate-900/60 border border-slate-800 overflow-hidden">
+            <button class="faq-trigger w-full p-5 text-left flex items-center justify-between text-sm sm:text-base font-semibold text-white hover:text-sky-400 transition-colors">
+              <span>Como a HelpCorp se diferencia de ferramentas como ServiceNow e Zendesk?</span>
+              <svg class="faq-icon w-5 h-5 text-slate-400 transition-transform duration-200 shrink-0 ml-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7"/></svg>
+            </button>
+            <div class="faq-content hidden p-5 pt-0 text-xs sm:text-sm text-slate-300 border-t border-slate-800/60 leading-relaxed">
+              Conforme detalhado no estudo acadêmico, plataformas como ServiceNow e Zendesk exigem altos custos de licenciamento em moeda estrangeira e longas consultorias de implantação. A HelpCorp foi concebida sob medida para o contexto organizacional brasileiro, com conformidade total à LGPD, integração direta com ERPs nacionais (TOTVS, Senior) e abordagem focada na experiência interna do colaborador (IXM).
+            </div>
+          </div>
+
+          <!-- FAQ 2 -->
+          <div class="rounded-xl bg-slate-900/60 border border-slate-800 overflow-hidden">
+            <button class="faq-trigger w-full p-5 text-left flex items-center justify-between text-sm sm:text-base font-semibold text-white hover:text-sky-400 transition-colors">
+              <span>Quanto tempo leva para migrar do modelo de WhatsApp/e-mail para a HelpCorp?</span>
+              <svg class="faq-icon w-5 h-5 text-slate-400 transition-transform duration-200 shrink-0 ml-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7"/></svg>
+            </button>
+            <div class="faq-content hidden p-5 pt-0 text-xs sm:text-sm text-slate-300 border-t border-slate-800/60 leading-relaxed">
+              O onboarding é rápido: através da importação de usuários via Active Directory ou arquivo CSV e da ativação do Single Sign-On (Google Workspace ou Microsoft 365), a empresa já pode iniciar a abertura de chamados no mesmo dia, sem necessidade de servidores locais (SaaS).
+            </div>
+          </div>
+
+          <!-- FAQ 3 -->
+          <div class="rounded-xl bg-slate-900/60 border border-slate-800 overflow-hidden">
+            <button class="faq-trigger w-full p-5 text-left flex items-center justify-between text-sm sm:text-base font-semibold text-white hover:text-sky-400 transition-colors">
+              <span>Como o cálculo de SLA Preditivo e Dinâmico realmente funciona?</span>
+              <svg class="faq-icon w-5 h-5 text-slate-400 transition-transform duration-200 shrink-0 ml-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7"/></svg>
+            </button>
+            <div class="faq-content hidden p-5 pt-0 text-xs sm:text-sm text-slate-300 border-t border-slate-800/60 leading-relaxed">
+              Em vez de definir prazos engessados (ex: "sempre 24 horas"), nosso algoritmo de machine learning avalia o volume atual da fila, o número de técnicos em turno, a sazonalidade da empresa (ex: fechamento de mês) e a complexidade histórica daquele tipo específico de demanda.
+            </div>
+          </div>
+
+          <!-- FAQ 4 -->
+          <div class="rounded-xl bg-slate-900/60 border border-slate-800 overflow-hidden">
+            <button class="faq-trigger w-full p-5 text-left flex items-center justify-between text-sm sm:text-base font-semibold text-white hover:text-sky-400 transition-colors">
+              <span>O sistema atende outros setores além de Tecnologia da Informação?</span>
+              <svg class="faq-icon w-5 h-5 text-slate-400 transition-transform duration-200 shrink-0 ml-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7"/></svg>
+            </button>
+            <div class="faq-content hidden p-5 pt-0 text-xs sm:text-sm text-slate-300 border-t border-slate-800/60 leading-relaxed">
+              Sim! Esse é um dos pilares do conceito de IXM: o mesmo ambiente atende demandas de Recursos Humanos (folha, férias), Financeiro (reembolsos, notas fiscais), Facilities (manutenção predial, ar condicionado) e Administrativo, com formulários adaptativos e permissões restritas a cada departamento.
+            </div>
+          </div>
+
+        </div>
+
+      </div>
+    </section>
+
+    <!-- ========================================================================
+         FINAL CTA
+         ======================================================================== -->
+    <section class="py-20 bg-gradient-to-b from-[#090e17] via-sky-950/30 to-[#090e17] border-t border-slate-800 text-center">
+      <div class="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8 space-y-6">
+        <h2 class="text-3xl sm:text-5xl font-extrabold text-white">
+          Pronto para elevar a maturidade operacional do seu suporte interno?
+        </h2>
+        <p class="text-base sm:text-lg text-slate-300 max-w-2xl mx-auto">
+          Junte-se a organizações que substituíram mensagens soltas por processos auditáveis, inteligência artificial e colaboradores satisfeitos.
+        </p>
+        <div class="pt-4 flex flex-col sm:flex-row items-center justify-center gap-4">
+          <button data-open-demo-modal class="w-full sm:w-auto px-8 py-4 rounded-xl font-bold text-sm bg-gradient-to-r from-sky-500 to-blue-600 hover:from-sky-400 hover:to-blue-500 text-white shadow-xl shadow-sky-500/25 transition-all">
+            Solicitar Demonstração Gratuita
+          </button>
+          <a href="#simulador" class="w-full sm:w-auto px-8 py-4 rounded-xl font-semibold text-sm glass-panel border border-slate-700 hover:border-slate-500 text-slate-200 transition-all">
+            Explorar Simulador do Sistema
+          </a>
+        </div>
+      </div>
+    </section>
+
+  </main>
+
+  <!-- ========================================================================
+       FOOTER
+       ======================================================================== -->
+  <footer class="bg-[#04060a] border-t border-slate-900 py-10 text-xs text-slate-500">
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 flex flex-col sm:flex-row items-center justify-between gap-4">
+      <div class="flex items-center gap-2">
+        <span class="font-bold text-slate-300">HelpCorp</span>
+        <span>•</span>
+        <span>Internal Experience Management (IXM) &copy; 2026</span>
+      </div>
+      <div class="flex items-center gap-6">
+        <a href="#solucao" class="hover:text-slate-300 transition-colors">A Solução</a>
+        <a href="#simulador" class="hover:text-slate-300 transition-colors">Simulador</a>
+        <a href="#modulos" class="hover:text-slate-300 transition-colors">Módulos</a>
+        <a href="#roi" class="hover:text-slate-300 transition-colors">Calculadora ROI</a>
+        <a href="#lgpd" class="hover:text-slate-300 transition-colors">Privacidade & LGPD</a>
+      </div>
+    </div>
+  </footer>
+
+  <!-- ========================================================================
+       MODAL DE DEMONSTRAÇÃO / CONTATO
+       ======================================================================== -->
+  <div id="demo-modal" class="hidden fixed inset-0 z-50 flex items-center justify-center p-4 bg-black/80 backdrop-blur-sm">
+    <div class="w-full max-w-lg rounded-2xl glass-panel border border-slate-700 bg-slate-900 p-6 sm:p-8 shadow-2xl relative">
+      
+      <!-- Close button -->
+      <button data-close-demo-modal class="absolute top-5 right-5 text-slate-400 hover:text-white text-xl p-1" aria-label="Fechar Modal">
+        ✕
+      </button>
+
+      <!-- Form View -->
+      <form id="demo-form" class="space-y-4">
+        <div class="space-y-1">
+          <span class="text-xs font-bold uppercase tracking-wider text-sky-400">Apresentação Corporativa</span>
+          <h3 class="text-xl font-bold text-white">Solicitar Demonstração do HelpCorp</h3>
+          <p class="text-xs text-slate-400">Preencha os dados abaixo para receber um link de demonstração interativa ou agendar com nossos especialistas.</p>
+        </div>
+
+        <div class="space-y-3 pt-2 text-xs">
+          <div>
+            <label class="block font-medium text-slate-300 mb-1">Nome Completo</label>
+            <input required type="text" placeholder="Ex: Ricardo Mendes" class="w-full bg-slate-950 border border-slate-800 rounded-lg p-3 text-slate-100 placeholder-slate-600 focus:outline-none focus:border-sky-500">
+          </div>
+
+          <div>
+            <label class="block font-medium text-slate-300 mb-1">E-mail Corporativo</label>
+            <input required type="email" placeholder="ricardo.mendes@empresa.com.br" class="w-full bg-slate-950 border border-slate-800 rounded-lg p-3 text-slate-100 placeholder-slate-600 focus:outline-none focus:border-sky-500">
+          </div>
+
+          <div class="grid grid-cols-2 gap-3">
+            <div>
+              <label class="block font-medium text-slate-300 mb-1">Setor Principal</label>
+              <select class="w-full bg-slate-950 border border-slate-800 rounded-lg p-3 text-slate-100 focus:outline-none focus:border-sky-500">
+                <option>Tecnologia da Informação (TI)</option>
+                <option>Recursos Humanos (RH)</option>
+                <option>Financeiro / Contabilidade</option>
+                <option>Facilities & Operações</option>
+                <option>Diretoria / Gestão Executiva</option>
+              </select>
+            </div>
+            <div>
+              <label class="block font-medium text-slate-300 mb-1">Porte da Empresa</label>
+              <select class="w-full bg-slate-950 border border-slate-800 rounded-lg p-3 text-slate-100 focus:outline-none focus:border-sky-500">
+                <option>100 a 300 colaboradores</option>
+                <option>301 a 1.000 colaboradores</option>
+                <option>Mais de 1.000 colaboradores</option>
+              </select>
+            </div>
+          </div>
+        </div>
+
+        <div class="pt-3">
+          <button type="submit" class="w-full py-3.5 rounded-xl font-bold text-sm bg-gradient-to-r from-sky-500 to-blue-600 hover:from-sky-400 hover:to-blue-500 text-white shadow-lg shadow-sky-500/30 transition-all">
+            Solicitar Apresentação Personalizada
+          </button>
+          <p class="text-[10px] text-center text-slate-500 mt-2">
+            Seus dados são tratados com sigilo em estrita conformidade com a LGPD.
+          </p>
+        </div>
+      </form>
+
+      <!-- Success Feedback View -->
+      <div id="demo-form-success" class="hidden text-center py-8 space-y-4">
+        <div class="w-14 h-14 rounded-full bg-emerald-500/20 text-emerald-400 flex items-center justify-center text-2xl mx-auto border border-emerald-500/30">
+          ✓
+        </div>
+        <h4 class="text-xl font-bold text-white">Solicitação Recebida com Sucesso!</h4>
+        <p class="text-xs text-slate-300 max-w-sm mx-auto leading-relaxed">
+          Enviamos as credenciais de acesso para teste corporativo e o convite de agendamento para o seu e-mail corporativo.
+        </p>
+        <button data-close-demo-modal class="px-6 py-2.5 rounded-xl text-xs font-semibold bg-slate-800 hover:bg-slate-700 text-slate-200 transition-colors">
+          Fechar Janela
+        </button>
+      </div>
+
+    </div>
+  </div>
+
+  <!-- Scripts -->
+  <script src="app.js"></script>
+</body>
+</html>
